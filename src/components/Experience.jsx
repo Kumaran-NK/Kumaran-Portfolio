@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { animate } from "animejs";
 import { ChevronRight, Image as ImageIcon, FileCheck2, X, ZoomIn, Building2 } from "lucide-react";
 import GlitchHeading from "./GlitchHeading";
-import DataCore from "./DataCore";
 
 // swap these for your real files — see the note at the bottom of this file
 import campusPhoto from "../assets/iiit-campus.jpg";
@@ -136,29 +135,10 @@ export default function Experience() {
   const exp = EXPERIENCES[active];
 
   const headingWrapRef = useRef(null);
-  const lineRef = useRef(null);
   const nodeRefs = useRef([]);
-  const packetRef = useRef(null);
   const cardRef = useRef(null);
   const statRefs = useRef([]);
   const shootingStarRefs = useRef([]);
-
-  /* Timeline rail draws itself once, the first time it's on screen */
-  useEffect(() => {
-    const el = lineRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          animate(el, { scaleX: [0, 1], duration: 900, ease: "outQuad" });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   /* Active tab glows continuously — a steady HUD pulse instead of the old
      dot scaling up, since scaling a whole tile reads as jittery, not techy */
@@ -177,21 +157,6 @@ export default function Experience() {
     });
     return () => a.pause();
   }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /* A signal packet travels the circuit trace beneath the tabs on a loop —
-     reads as "data flowing between entries" rather than a static line */
-  useEffect(() => {
-    const packet = packetRef.current;
-    if (!packet) return;
-    const a = animate(packet, {
-      left: ["0%", "100%"],
-      opacity: [0, 1, 1, 0],
-      duration: 2600,
-      ease: "inOutSine",
-      loop: true,
-    });
-    return () => a.pause();
-  }, []);
 
   /* Occasional shooting-star streaks — the "space" half of the theme.
      Kept rare (long gap between loops) and quick, so it's a detail you
@@ -300,93 +265,76 @@ export default function Experience() {
         />
       </div>
 
-      {/* Heading row — DataCore sits right beside the title now, so it reads
-          as part of the "EXPERIENCE" heading instead of floating off-page */}
+      {/* Heading row — cyan + amber combo for the Experience title font */}
       <div className="flex items-center gap-3 mb-2">
-        <div ref={headingWrapRef}>
+        <div 
+          ref={headingWrapRef}
+          style={{ 
+            '--neon-cyan': 'var(--circuit)', 
+            '--neon-magenta': 'var(--solder)' 
+          }}
+        >
           <GlitchHeading text="EXPERIENCE" />
         </div>
-        <DataCore size={40} />
         <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)]" />
       </div>
 
-      <div className="flex items-center gap-2 mb-12 text-[11px] tracking-wide text-[var(--ink-dim)]">
-        <span className="w-2 h-2 rounded-full bg-[var(--circuit)] blink-dot" />
-        SYSTEM: ONLINE // SECTION_04.EXPERIENCE
-      </div>
+      <br></br>
 
-      {/* Entry selector — HUD process tiles instead of a dot-and-line
-          timeline. Each tile reads like a system log entry (index tag,
-          status LED, role, date); a dashed circuit trace with a traveling
-          signal packet ties them together underneath. */}
+      {/* Entry selector — HUD process tiles */}
       <div className="relative mb-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10">
           {EXPERIENCES.map((item, i) => {
             const isActive = active === i;
             return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setActive(i)}
-                ref={(el) => (nodeRefs.current[i] = el)}
-                className="relative text-left px-5 py-4 border-2 transition-colors duration-200 group"
-                style={{
-                  borderColor: isActive ? EDGE_VAR[item.edge] : "var(--line)",
-                  backgroundColor: isActive ? "var(--bg-panel)" : "transparent",
-                }}
-              >
-                {/* corner brackets — HUD framing device */}
-                {["-top-px -left-px border-t-2 border-l-2", "-top-px -right-px border-t-2 border-r-2", "-bottom-px -left-px border-b-2 border-l-2", "-bottom-px -right-px border-b-2 border-r-2"].map((pos) => (
-                  <span
-                    key={pos}
-                    className={`absolute w-3 h-3 pointer-events-none ${pos}`}
-                    style={{ borderColor: isActive ? EDGE_VAR[item.edge] : "var(--line)" }}
-                  />
-                ))}
-
-                <div className="flex items-center gap-2 mb-2">
-                  <span
-                    className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors"
-                    style={{
-                      backgroundColor: isActive ? EDGE_VAR[item.edge] : "var(--ink-dim)",
-                      boxShadow: isActive ? `0 0 8px 2px ${EDGE_VAR[item.edge]}` : "none",
-                    }}
-                  />
-                  <span
-                    className="text-[10px] font-bold tracking-[0.2em]"
-                    style={{ color: isActive ? EDGE_VAR[item.edge] : "var(--ink-dim)" }}
-                  >
-                    {`LOG_0${i + 1}`}
-                  </span>
-                </div>
-
-                <p
-                  className={`text-sm sm:text-base font-bold mb-1 transition-colors ${
-                    isActive ? "text-[var(--ink)]" : "text-[var(--ink-dim)] group-hover:text-[var(--ink)]"
-                  }`}
+              <div key={item.id} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setActive(i)}
+                  ref={(el) => (nodeRefs.current[i] = el)}
+                  className="w-full text-left px-5 py-4 border-2 transition-colors duration-200 group relative z-20"
+                  style={{
+                    borderColor: isActive ? EDGE_VAR[item.edge] : "var(--line)",
+                    backgroundColor: isActive ? "var(--bg-panel)" : "transparent",
+                  }}
                 >
-                  {item.roleShort}
-                </p>
-                <p className="text-[11px] tracking-wide text-[var(--ink-dim)]">{item.date}</p>
-              </button>
+                  {/* corner brackets — HUD framing device */}
+                  {['-top-px -left-px border-t-2 border-l-2', '-top-px -right-px border-t-2 border-r-2', '-bottom-px -left-px border-b-2 border-l-2', '-bottom-px -right-px border-b-2 border-r-2'].map((pos) => (
+                    <span
+                      key={pos}
+                      className={`absolute w-3 h-3 pointer-events-none ${pos}`}
+                      style={{ borderColor: isActive ? EDGE_VAR[item.edge] : "var(--line)" }}
+                    />
+                  ))}
+
+                  <div className="flex items-center gap-2 mb-2">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors"
+                      style={{
+                        backgroundColor: isActive ? EDGE_VAR[item.edge] : "var(--ink-dim)",
+                        boxShadow: isActive ? `0 0 8px 2px ${EDGE_VAR[item.edge]}` : "none",
+                      }}
+                    />
+                    <span
+                      className="text-[10px] font-bold tracking-[0.2em]"
+                      style={{ color: isActive ? EDGE_VAR[item.edge] : "var(--ink-dim)" }}
+                    >
+                      {`LOG_0${i + 1}`}
+                    </span>
+                  </div>
+
+                  <p
+                    className={`text-sm sm:text-base font-bold mb-1 transition-colors ${
+                      isActive ? "text-[var(--ink)]" : "text-[var(--ink-dim)] group-hover:text-[var(--ink)]"
+                    }`}
+                  >
+                    {item.roleShort}
+                  </p>
+                  <p className="text-[11px] tracking-wide text-[var(--ink-dim)]">{item.date}</p>
+                </button>
+              </div>
             );
           })}
-        </div>
-
-        {/* decorative circuit trace with a traveling data packet */}
-        <div className="hidden sm:block absolute left-0 right-0 -bottom-6 h-px overflow-hidden">
-          <span
-            ref={lineRef}
-            className="absolute inset-0 origin-left"
-            style={{
-              backgroundImage: "repeating-linear-gradient(to right, var(--line) 0 6px, transparent 6px 14px)",
-            }}
-          />
-          <span
-            ref={packetRef}
-            className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
-            style={{ left: 0, backgroundColor: "var(--circuit)", boxShadow: "0 0 8px 2px var(--circuit)" }}
-          />
         </div>
       </div>
 
@@ -550,11 +498,3 @@ export default function Experience() {
     </section>
   );
 }
-
-/*
-  ASSET NOTE:
-  Drop iiit-campus.jpg and iiit-certificate.jpg into  src/assets/experience/
-  in your project (create the folder), keeping those exact filenames — the
-  imports at the top of this file already point there. Renamed them? Just
-  update the two import lines.
-*/

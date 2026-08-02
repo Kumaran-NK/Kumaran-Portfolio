@@ -5,7 +5,7 @@ import {
   Settings,
   CheckSquare,
 } from "lucide-react";
-import { animate } from "animejs";
+import { motion } from "framer-motion";
 import StackIcon from "tech-stack-icons";
 import BootTerminal from "./BootTerminal";
 
@@ -21,7 +21,6 @@ const PROJECT_HIGHLIGHTS = [
   "Worked across the full stack — schema, API, and UI — coordinating with teammates to turn a rough spec into something that actually ships.",
 ];
 
-/* Grouped tech stack matching your requested structure */
 const SKILL_CATEGORIES = [
   {
     label: "Languages",
@@ -108,7 +107,6 @@ const AREAS_OF_EXPERTISE = [
   "Data Structures & System Design",
 ];
 
-/* Terminal lines for the focus-areas readout below the tech stack */
 const FOCUS_LINES = [
   { text: "~/kumaran $ ./show_current_focus.sh", color: "text-[var(--ink-dim)]" },
   { text: "Loading active focus areas...", color: "text-[var(--solder)]" },
@@ -120,27 +118,55 @@ const FOCUS_LINES = [
 
 /* ------------------------------------------------------------------ */
 
+// Larger 8-Bit Cyber Koala, neatly positioned above the card right-edge with zero dead space
+const CyberKoalaBranch = () => (
+  <div className="relative w-full h-8 mb-1 flex items-center justify-end px-2 pointer-events-none">
+    <motion.div
+      className="relative drop-shadow-[0_0_8px_rgba(47,230,217,0.6)]"
+      animate={{ rotate: [-2, 2, -2] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      style={{ transformOrigin: "bottom center" }}
+    >
+      <svg
+        width="96"
+        height="40"
+        viewBox="0 0 32 16"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ shapeRendering: "crispEdges" }}
+      >
+        {/* Neon Branch extending across */}
+        <rect x="0" y="12" width="32" height="3" fill="#00ff9f" />
+        <rect x="8" y="11" width="2" height="5" fill="#00cc80" />
+        <rect x="22" y="11" width="2" height="5" fill="#00cc80" />
+
+        {/* Koala Big Round Ears */}
+        <rect x="10" y="3" width="3" height="3" fill="var(--ink-dim)" />
+        <rect x="19" y="3" width="3" height="3" fill="var(--ink-dim)" />
+        
+        {/* Koala Head & Big Fluffy Face */}
+        <rect x="11" y="5" width="10" height="7" fill="var(--ink-dim)" />
+        <rect x="13" y="7" width="6" height="4" fill="var(--ink)" />
+
+        {/* Cyber Glowing Cyan Eyes */}
+        <rect x="13" y="6" width="1" height="1" fill="var(--circuit)" className="animate-pulse" />
+        <rect x="18" y="6" width="1" height="1" fill="var(--circuit)" className="animate-pulse" />
+
+        {/* Big Black Leather Nose */}
+        <rect x="15" y="8" width="2" height="2" fill="var(--void)" />
+
+        {/* Body hugging the branch */}
+        <rect x="12" y="11" width="8" height="4" fill="var(--ink-dim)" />
+      </svg>
+    </motion.div>
+  </div>
+);
+
 export default function SkillsInnovation() {
-  const nodeRef = useRef(null);
-
-  useEffect(() => {
-    const node = nodeRef.current;
-    if (!node) return;
-    const a = animate(node, {
-      boxShadow: ["0 0 0px 0px var(--signal)", "0 0 14px 4px var(--signal)"],
-      duration: 1000,
-      ease: "inOutSine",
-      loop: true,
-      alternate: true,
-    });
-    return () => a.pause();
-  }, []);
-
   return (
     <section id="skills" className="max-w-7xl mx-auto px-6 py-24">
       {/* Section Ribbon */}
       <div
-        className="inline-flex items-center gap-2 px-5 py-2.5 mb-10 -rotate-1 border-2 border-black"
+        className="inline-flex items-center gap-2 px-5 py-2.5 mb-6 -rotate-1 border-2 border-black"
         style={{ backgroundColor: "var(--signal)", boxShadow: "4px 4px 0 rgba(0,0,0,0.4)" }}
       >
         <FlaskConical size={18} className="text-black shrink-0" />
@@ -149,15 +175,11 @@ export default function SkillsInnovation() {
         </span>
       </div>
 
-      {/* Project Highlights */}
-      <div className="relative pl-8 mb-10">
-        <span className="absolute left-[3px] top-2 bottom-2 w-[2px] bg-[var(--line)]" />
-        <span
-          ref={nodeRef}
-          className="absolute left-0 top-2 w-[9px] h-[9px] rounded-full border-2"
-          style={{ backgroundColor: "var(--signal)", borderColor: "var(--signal)" }}
-        />
+      {/* Cyber Koala on Branch positioned right above the card */}
+      <CyberKoalaBranch />
 
+      {/* Project Highlights Card */}
+      <div className="mb-10">
         <div
           className="relative overflow-hidden brutal-border bg-[var(--bg-panel)] p-7 sm:p-8"
           style={{ boxShadow: "8px 8px 0px 0px var(--signal)" }}
@@ -182,7 +204,7 @@ export default function SkillsInnovation() {
         </div>
       </div>
 
-      {/* Tech Stack — now full width, its own row */}
+      {/* Tech Stack — Full Width */}
       <div
         className="relative brutal-border bg-[var(--bg-panel)] p-6 sm:p-7 mb-10"
         style={{ boxShadow: "6px 6px 0px 0px var(--line)" }}
@@ -196,14 +218,12 @@ export default function SkillsInnovation() {
         <div className="flex flex-col gap-5">
           {SKILL_CATEGORIES.map((category) => (
             <div key={category.label} className="flex flex-col md:flex-row md:items-start gap-2 md:gap-4">
-              {/* Category Title */}
               <div className="md:w-[150px] shrink-0 mt-1.5">
                 <span className="text-xs font-bold text-[var(--signal)] uppercase tracking-wider">
                   {category.label}
                 </span>
               </div>
 
-              {/* Skill Badges */}
               <div className="flex flex-wrap gap-2">
                 {category.items.map((skill) => (
                   <div
@@ -226,13 +246,11 @@ export default function SkillsInnovation() {
         </div>
       </div>
 
-      {/* Below the tech stack: sticky note + focus-areas terminal side by
-          side, so the space that used to sit empty under a short note now
-          holds real content instead. */}
-      <div className="grid lg:grid-cols-[340px_1fr] gap-10 items-start">
+      {/* Bottom Section: Centered-Focused Note & Terminal */}
+      <div className="grid lg:grid-cols-[340px_1fr] gap-10 items-start justify-center max-w-6xl mx-auto pt-4">
         {/* Area of Expertise Sticky Note */}
         <div
-          className="relative rotate-2 p-6 pt-9 w-full shadow-xl"
+          className="relative rotate-2 p-6 pt-9 w-full shadow-xl justify-self-center lg:justify-self-end max-w-[340px]"
           style={{ backgroundColor: "var(--solder)" }}
         >
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-white/50 -rotate-2" />
@@ -248,12 +266,14 @@ export default function SkillsInnovation() {
         </div>
 
         {/* Focus-areas terminal */}
-        <BootTerminal
-          label="kumaran@dev-env:~"
-          lines={FOCUS_LINES}
-          edge="var(--circuit)"
-          className="max-w-none"
-        />
+        <div className="w-full justify-self-center lg:justify-self-start">
+          <BootTerminal
+            label="kumaran@dev-env:~"
+            lines={FOCUS_LINES}
+            edge="var(--circuit)"
+            className="max-w-none"
+          />
+        </div>
       </div>
     </section>
   );

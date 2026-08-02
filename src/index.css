@@ -11,7 +11,7 @@
   --signal: #ff2e7e;
   --solder: #ffc53d;
   --line: #2a2a33;
-   --neon-cyan: #00f0ff;
+  --neon-cyan: #00f0ff;
   --neon-magenta: #ff007f;
   --neon-yellow: #fcee0c;
   --neon-green: #00ff9f;
@@ -78,17 +78,26 @@ body {
   outline-offset: 2px;
 }
 
-/* Animated cyberpunk glitch heading: two color-split copies sliced via clip-path */
+/* Animated cyberpunk glitch heading: stacked hard shadow, pixelated edges */
 .glitch-heading {
   position: relative;
   display: inline-block;
-  color: var(--circuit);
-  text-shadow:
-    2px 0 var(--signal),
-    -2px 0 var(--signal),
-    0 2px var(--signal),
-    0 -2px var(--signal);
+  font-family: "Impact", sans-serif;
+  font-weight: 500; 
+  letter-spacing: normal;
+  color: var(--neon-cyan);
+  
+  /* 1. Stacked Hard Shadows: Magenta offset, then Black offset further */
+  text-shadow: 
+    3px 3px 0px var(--neon-magenta),
+    6px 6px 0px #000000;
+  
+  /* 2. Force jagged, pixelated edges (no anti-aliasing) */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  font-smooth: never;
 }
+
 .glitch-heading::before,
 .glitch-heading::after {
   content: attr(data-text);
@@ -97,31 +106,36 @@ body {
   mix-blend-mode: screen;
   pointer-events: none;
 }
+
 .glitch-heading::before {
-  color: var(--signal);
-  animation: glitch-slice-1 3.2s infinite steps(1, end);
+  color: var(--neon-magenta);
+  animation: glitch-slice-1 1.5s infinite steps(1, end);
 }
+
 .glitch-heading::after {
-  color: var(--circuit);
-  animation: glitch-slice-2 2.6s infinite steps(1, end);
+  color: var(--neon-cyan);
+  animation: glitch-slice-2 1.2s infinite steps(1, end);
 }
+
 @keyframes glitch-slice-1 {
   0%, 89%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  90% { clip-path: inset(10% 0 65% 0); transform: translate(-3px, 1px); }
-  91% { clip-path: inset(55% 0 15% 0); transform: translate(3px, -1px); }
-  92% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, 0); }
+  90% { clip-path: inset(10% 0 65% 0); transform: translate(-8px, 2px); }
+  91% { clip-path: inset(55% 0 15% 0); transform: translate(8px, -2px); }
+  92% { clip-path: inset(30% 0 40% 0); transform: translate(-5px, 0); }
   93% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  96% { clip-path: inset(70% 0 5% 0); transform: translate(2px, 1px); }
+  96% { clip-path: inset(70% 0 5% 0); transform: translate(6px, 2px); }
   97% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
 }
+
 @keyframes glitch-slice-2 {
   0%, 84%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  85% { clip-path: inset(60% 0 10% 0); transform: translate(3px, 0); }
-  86% { clip-path: inset(15% 0 60% 0); transform: translate(-3px, 1px); }
+  85% { clip-path: inset(60% 0 10% 0); transform: translate(8px, 0); }
+  86% { clip-path: inset(15% 0 60% 0); transform: translate(-8px, 2px); }
   87% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  94% { clip-path: inset(40% 0 35% 0); transform: translate(2px, -1px); }
+  94% { clip-path: inset(40% 0 35% 0); transform: translate(5px, -2px); }
   95% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
 }
+
 .glitch-heading--inverse {
   color: var(--signal);
   text-shadow:
@@ -132,37 +146,6 @@ body {
 }
 .glitch-heading--inverse::before { color: var(--circuit); }
 .glitch-heading--inverse::after { color: var(--signal); }
-
-/* Hover-only neon glow, cycling electric cyan / hot magenta / acid yellow.
-   The card's own static offset-shadow (set inline) stays underneath it. */
-.cyber-glow-hover {
-  transition: filter 0.2s ease;
-}
-.cyber-glow-hover:hover {
-  animation: neon-cycle 2.4s linear infinite;
-}
-@keyframes neon-cycle {
-  0% {
-    box-shadow:
-      0 0 22px 2px rgba(0, 240, 255, 0.55),
-      8px 8px 0px 0px var(--cf-edge, var(--circuit));
-  }
-  33% {
-    box-shadow:
-      0 0 22px 2px rgba(255, 0, 127, 0.55),
-      8px 8px 0px 0px var(--cf-edge, var(--circuit));
-  }
-  66% {
-    box-shadow:
-      0 0 22px 2px rgba(252, 238, 12, 0.55),
-      8px 8px 0px 0px var(--cf-edge, var(--circuit));
-  }
-  100% {
-    box-shadow:
-      0 0 22px 2px rgba(0, 240, 255, 0.55),
-      8px 8px 0px 0px var(--cf-edge, var(--circuit));
-  }
-}
 
 /* subtle chromatic-aberration flicker on hover, for card titles */
 .cyber-title:hover {
@@ -230,4 +213,29 @@ body {
 .glitch-active {
   animation: glitch-anim 0.2s infinite;
   filter: drop-shadow(2px 0px 0px red) drop-shadow(-2px 0px 0px blue);
+}
+
+/* Soft foggy glass glow for Project Cards — static haze, symmetric on all sides.
+   Set --glow-color (as an "R, G, B" string) per-card via inline style to give
+   each card its own color, e.g. style={{ "--glow-color": "255, 46, 126" }} */
+.cyber-card-glow {
+  --glow-color: 255, 255, 255;
+  border-radius: 1rem;
+  border-color: rgba(var(--glow-color), 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(var(--glow-color), 0.03);
+  box-shadow:
+    0 0 40px rgba(var(--glow-color), 0.15),
+    0 0 80px rgba(var(--glow-color), 0.08),
+    inset 0 1px 0 rgba(var(--glow-color), 0.08);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.cyber-card-glow:hover {
+  border-color: rgba(var(--glow-color), 0.4);
+  box-shadow:
+    0 0 55px rgba(var(--glow-color), 0.22),
+    0 0 100px rgba(var(--glow-color), 0.12),
+    inset 0 1px 0 rgba(var(--glow-color), 0.1);
 }

@@ -59,10 +59,7 @@ function WaveBars() {
 
 function PlaceholderCard({ project }) {
   return (
-    <div
-      className="cyber-glow-hover bg-[var(--bg-panel)] p-6 rounded-sm"
-      style={{ boxShadow: "0 0 15px 0 var(--circuit)", "--cf-edge": "var(--circuit)" }}
-    >
+    <div className="cyber-card-glow bg-[var(--bg-panel)] p-6 rounded-2xl border-2">
       <div className="flex items-center gap-2 mb-4">
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--signal)]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--solder)]" />

@@ -25,7 +25,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="inline-block px-4 py-2 mb-8 text-xs tracking-wide text-[var(--ink-dim)] border border-[var(--line)] rounded-full bg-[var(--bg-panel)]"
         >
-          DESIGN CIRCUITS, DEPLOY SYSTEMS, SHIP INTELLIGENCE
+          DEBUGGING LIFE ONE STACK TRACE AT A TIME.
         </motion.div>
 
         <motion.h1
@@ -43,7 +43,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="border-l-4 border-[var(--solder)] pl-4 text-[15px] leading-relaxed text-[var(--ink-dim)] max-w-md mb-8"
         >
-          An electronics &amp; communication student who got obsessed with
+          {/* An electronics &amp; communication student who got obsessed with
           systems that don't fall over. I build at the intersection of{" "}
           <span className="bg-[var(--solder)]/20 text-[var(--ink)] px-1">
             distributed systems
@@ -52,7 +52,13 @@ export default function Hero() {
           <span className="text-[var(--ink)] underline decoration-[var(--circuit)]">
             logistics tech
           </span>
-          .
+          . */}
+
+          An Electronics & Communication student who got obsessed with systems that don't fall over.
+
+I build backend systems, AI-powered applications, and distributed software that solve real-world problems.
+
+Currently exploring system design, cloud-native architecture, and the art of making software survive production.
         </motion.p>
 
         {/* Social Buttons */}
