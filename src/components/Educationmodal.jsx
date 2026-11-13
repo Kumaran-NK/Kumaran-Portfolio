@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import campusPhoto from "../assets/campus.jpg";
-import collegeLogo from "../assets/sec-logo.png";
+import campusPhoto from "../assets/education/campus.jpg";
+import collegeLogo from "../assets/education/sec-logo.png";
 
 const STATS = [
   { label: "Degree", value: "Bachelor of Engineering (B.E)" },

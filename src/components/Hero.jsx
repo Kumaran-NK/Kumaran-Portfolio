@@ -4,8 +4,8 @@ import { Code2, Link2 } from "lucide-react";
 import StickyNote from "./StickyNote";
 import BootTerminal from "./BootTerminal";
 import EducationModal from "./EducationModal";
-import kumaPhoto from "../assets/kuma.png";
-import meowMan from "../assets/image.png";
+import kumaPhoto from "../assets/profile/kuma.png";
+import meowMan from "../assets/profile/image.png";
 
 import CurrentModal from "./CurrentModal";
 

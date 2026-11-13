@@ -15,11 +15,11 @@ import GlitchHeading from "./GlitchHeading";
 // Drop your certificate images into src/assets/certs/ and import them here.
 // Using PDF page exports (converted to jpg) works fine for display.
 // ---------------------------------------------------------------------------
-import oracleImg from "../assets/oracle-java-se-21.jpg";
-import iotImg from "../assets/nptel-iot.jpg";
-import cloudImg from "../assets/nptel-cloud-computing.jpg";
-import ibmImg from "../assets/ibm-java-basics.jpg";
-import pythonImg from "../assets/uom-python-basics.jpg";
+import oracleImg from "../assets/certs/oracle-java-se-21.jpg";
+import iotImg from "../assets/certs/nptel-iot.jpg";
+import cloudImg from "../assets/certs/nptel-cloud-computing.jpg";
+import ibmImg from "../assets/certs/ibm-java-basics.jpg";
+import pythonImg from "../assets/certs/uom-python-basics.jpg";
 
 const FEATURED = {
   title: "Oracle Certified Professional",

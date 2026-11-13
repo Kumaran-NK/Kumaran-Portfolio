@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import currentPhoto from "../assets/current.jpeg"; 
-import devIcon from "../assets/dev.png";
+import currentPhoto from "../assets/profile/current.jpeg"; 
+import devIcon from "../assets/profile/dev.png";
 
 const STATS = [
   { label: "Status", value: "Open to Internships" },

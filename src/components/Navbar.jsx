@@ -5,7 +5,7 @@ import Terminal from "./Terminal";
 // Import your resume here. 
 // Note: You may need to adjust the path (e.g., "./assets/..." or "../../assets/...") 
 // depending on exactly where Navbar.jsx is located relative to the assets folder.
-import resumeFile from "../assets/Kumaran N Resume.pdf";
+import resumeFile from "../assets/docs/Kumaran N Resume.pdf";
 
 const LINKS = [
   { label: "Home", href: "#home" },

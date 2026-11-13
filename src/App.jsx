@@ -7,7 +7,7 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import SkillsInnovation from "./components/Skillsinnovation";
-import Contact from "./components/contact";
+import Contact from "./components/Contact";
 import IntroScene from "./components/Introscene";
 import Certifications from "./components/Certifications";
 

@@ -5,8 +5,8 @@ import { ChevronRight, Image as ImageIcon, FileCheck2, X, ZoomIn, Building2 } fr
 import GlitchHeading from "./GlitchHeading";
 
 // swap these for your real files — see the note at the bottom of this file
-import campusPhoto from "../assets/iiit-campus.jpg";
-import certificatePhoto from "../assets/iiit-certificate.jpg";
+import campusPhoto from "../assets/education/iiit-campus.jpg";
+import certificatePhoto from "../assets/certs/iiit-certificate.jpg";
 
 /* ------------------------------------------------------------------ */
 /* DATA — numbers pulled straight from your internship certificate    */
