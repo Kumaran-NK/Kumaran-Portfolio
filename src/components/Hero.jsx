@@ -4,8 +4,7 @@ import { Code2, Link2 } from "lucide-react";
 import StickyNote from "./StickyNote";
 import BootTerminal from "./BootTerminal";
 import EducationModal from "./EducationModal";
-import kumaPhoto from "../assets/profile/kuma.png";
-import meowMan from "../assets/profile/image.png";
+import kumaranPhoto from "../assets/photos/Kumaran.png";
 
 import CurrentModal from "./CurrentModal";
 
@@ -158,7 +157,7 @@ Currently exploring system design, cloud-native architecture, and the art of mak
               {/* Image strict container to completely shield the photo */}
               <div className="w-full relative overflow-hidden bg-black aspect-[4/5] border border-black/40">
                 <img
-                  src={meowMan}
+                  src={kumaranPhoto}
                   alt="Kumaran"
                   className="w-full h-full object-cover block"
                 />

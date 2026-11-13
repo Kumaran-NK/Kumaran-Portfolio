@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import currentPhoto from "../assets/profile/current.jpeg"; 
+import currentPhoto from "../assets/photos/kuma.png"; 
 import devIcon from "../assets/profile/dev.png";
 
 const STATS = [
