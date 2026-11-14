@@ -163,7 +163,7 @@ const CyberKoalaBranch = () => (
 
 export default function SkillsInnovation() {
   return (
-    <section id="skills" className="max-w-7xl mx-auto px-6 py-24">
+    <section id="skills" className="max-w-7xl mx-auto px-6 py-28 scroll-mt-20">
       {/* Section Ribbon */}
       <div
         className="inline-flex items-center gap-2 px-5 py-2.5 mb-6 -rotate-1 border-2 border-black"

@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TerminalSquare, Menu, X } from "lucide-react";
 import Terminal from "./Terminal"; 
 
 // Import your resume here. 
-// Note: You may need to adjust the path (e.g., "./assets/..." or "../../assets/...") 
-// depending on exactly where Navbar.jsx is located relative to the assets folder.
 import resumeFile from "../assets/docs/Kumaran N Resume.pdf";
 
 const LINKS = [
@@ -20,6 +18,36 @@ const LINKS = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  // Scroll-spy: track which section is currently in view
+  useEffect(() => {
+    const sectionIds = LINKS.map((l) => l.href.replace("#", ""));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the entry that is most visible
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -60% 0px", // triggers when section is near top-third of viewport
+        threshold: [0, 0.25, 0.5],
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -34,25 +62,34 @@ export default function Navbar() {
           </a>
 
           <div className="hidden md:flex items-center gap-8 text-sm text-[var(--ink-dim)]">
-            {LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="hover:text-[var(--ink)] transition-colors"
-              >
-                {label === "Home" ? (
-                  <span className="text-[var(--solder)] bg-[var(--solder)]/10 px-3 py-1.5 border border-[var(--solder)]/40">
-                    {label}
-                  </span>
-                ) : (
-                  label
-                )}
-              </a>
-            ))}
+            {LINKS.map(({ label, href }) => {
+              const sectionId = href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  className={`transition-colors ${
+                    isActive
+                      ? ""
+                      : "hover:text-[var(--ink)]"
+                  }`}
+                >
+                  {isActive ? (
+                    <span className="text-[var(--solder)] bg-[var(--solder)]/15 px-3 py-1.5 border-2 border-[var(--solder)]/60 font-semibold shadow-[0_0_10px_rgba(255,197,61,0.2)]">
+                      {label}
+                    </span>
+                  ) : (
+                    label
+                  )}
+                </a>
+              );
+            })}
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            {/* Desktop Resume Link Updated */}
+            {/* Desktop Resume Link */}
             <a
               href={resumeFile}
               target="_blank"
@@ -62,13 +99,20 @@ export default function Navbar() {
               RESUME.PDF
             </a>
             
-            <button 
-              onClick={() => setIsTerminalOpen(true)}
-              className="p-2 border border-[var(--line)] text-[var(--circuit)] hover:bg-[var(--circuit)]/10 transition-colors cursor-pointer"
-              aria-label="Open Terminal"
-            >
-              <TerminalSquare size={18} />
-            </button>
+            {/* Terminal button with tooltip */}
+            <div className="relative group">
+              <button 
+                onClick={() => setIsTerminalOpen(true)}
+                className="p-2 border border-[var(--line)] text-[var(--circuit)] hover:bg-[var(--circuit)]/10 hover:border-[var(--circuit)] transition-colors cursor-pointer"
+                aria-label="Open Terminal"
+                title="Open Terminal"
+              >
+                <TerminalSquare size={18} />
+              </button>
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-mono bg-[var(--bg-panel)] border border-[var(--line)] text-[var(--ink-dim)] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Terminal
+              </span>
+            </div>
           </div>
 
           <button
@@ -82,18 +126,25 @@ export default function Navbar() {
 
         {open && (
           <div className="md:hidden flex flex-col gap-1 px-6 pb-4 text-sm text-[var(--ink-dim)]">
-            {LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="py-2 border-b border-[var(--line)]"
-              >
-                {label}
-              </a>
-            ))}
+            {LINKS.map(({ label, href }) => {
+              const sectionId = href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className={`py-2 border-b border-[var(--line)] ${
+                    isActive ? "text-[var(--solder)] font-semibold" : ""
+                  }`}
+                >
+                  {label}
+                </a>
+              );
+            })}
             
-            {/* Mobile Resume Link Updated */}
+            {/* Mobile Resume Link */}
             <a
               href={resumeFile}
               target="_blank"

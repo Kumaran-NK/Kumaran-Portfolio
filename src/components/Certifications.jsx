@@ -10,6 +10,8 @@ import {
   ZoomIn,
 } from "lucide-react";
 import GlitchHeading from "./GlitchHeading";
+import cyberpunkRaccoon from "../assets/gifs/cyberpunk_raccoon.gif";
+import cyberpunkRaccoonStatic from "../assets/gifs/cyberpunk_raccoon-static.png";
 
 // ---------------------------------------------------------------------------
 // Drop your certificate images into src/assets/certs/ and import them here.
@@ -218,6 +220,33 @@ function CertCard({ cert, onZoom }) {
   );
 }
 
+// Cyberpunk Raccoon mascot aligned to the heading's baseline
+const CyberRaccoon = () => (
+  <motion.div 
+    className="cursor-pointer drop-shadow-[0_0_12px_rgba(0,245,255,0.35)] shrink-0 select-none self-baseline"
+    whileHover={{ scale: 1.15, y: -4 }}
+    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+    title="Cyberpunk Raccoon"
+  >
+    <picture>
+      <source
+        srcSet={cyberpunkRaccoonStatic}
+        media="(prefers-reduced-motion: reduce)"
+      />
+      <img
+        src={cyberpunkRaccoon}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        width={443}
+        height={394}
+        className="h-[52px] sm:h-[64px] lg:h-[74px] w-auto object-contain pointer-events-none block translate-y-[8px] sm:translate-y-[10px]"
+        style={{ imageRendering: "pixelated" }}
+      />
+    </picture>
+  </motion.div>
+);
+
 export default function Certifications() {
   const [lightbox, setLightbox] = useState(null); // { src, title } | null
 
@@ -225,12 +254,13 @@ export default function Certifications() {
   const closeZoom = () => setLightbox(null);
 
   return (
-    <section id="certifications" className="max-w-7xl mx-auto px-6 py-24">
-      <div className="flex items-center gap-4 mb-4">
+    <section id="certifications" className="max-w-7xl mx-auto px-6 py-28 scroll-mt-20">
+      <div className="flex flex-wrap items-baseline gap-3 sm:gap-5 mb-4">
         <div className="ml-6" style={{ fontFamily: "Impact, sans-serif" }}>
           <GlitchHeading text="CERTIFICATIONS" />
         </div>
-        <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)]" />
+        <CyberRaccoon />
+        <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)] self-baseline mb-1.5" />
       </div>
       <br />
 

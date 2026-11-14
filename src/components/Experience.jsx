@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { animate } from "animejs";
 import { ChevronRight, Image as ImageIcon, FileCheck2, X, ZoomIn, Building2 } from "lucide-react";
 import GlitchHeading from "./GlitchHeading";
+import redPandaGif from "../assets/gifs/cyberpunk_red_panda.gif";
+import redPandaStatic from "../assets/gifs/cyberpunk_red_panda-static.png";
 
 // swap these for your real files — see the note at the bottom of this file
 import campusPhoto from "../assets/education/iiit-campus.jpg";
@@ -229,7 +231,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="relative max-w-7xl mx-auto px-6 py-24 overflow-hidden">
+    <section id="experience" className="relative max-w-7xl mx-auto px-6 py-28 overflow-hidden scroll-mt-20">
       {/* Space layer — sits behind everything, kept faint so it reads as
           atmosphere behind the circuit-board grid rather than a second,
           competing theme. Nothing here should ever outshine the content. */}
@@ -266,7 +268,7 @@ export default function Experience() {
       </div>
 
       {/* Heading row — cyan + amber combo for the Experience title font */}
-      <div className="flex items-center gap-3 mb-2">
+      <div className="flex items-end gap-3 mb-2">
         <div 
           ref={headingWrapRef}
           style={{ 
@@ -276,7 +278,30 @@ export default function Experience() {
         >
           <GlitchHeading text="EXPERIENCE" />
         </div>
-        <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)]" />
+        <div
+          className="hidden sm:flex items-center justify-center overflow-hidden shrink-0 w-[115px] h-[70px] lg:w-[140px] lg:h-[84px] select-none pointer-events-none drop-shadow-[0_0_8px_rgba(0,255,230,0.35)]"
+          aria-hidden="true"
+        >
+          <picture className="flex items-center justify-center">
+            <source
+              srcSet={redPandaStatic}
+              media="(prefers-reduced-motion: reduce)"
+            />
+            <img
+              src={redPandaGif}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width={724}
+              height={241}
+              className="h-[74px] lg:h-[88px] w-auto max-w-none block"
+              style={{
+                imageRendering: "pixelated",
+              }}
+            />
+          </picture>
+        </div>
+        <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)] mb-1" />
       </div>
 
       <br></br>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { NotebookPen } from "lucide-react";
 import GlitchHeading from "./GlitchHeading";
+import cyberpunkOwl from "../assets/svgs/cyberpunk_owl.svg";
 
 const PILLS = [
   "DISTRIBUTED SYSTEMS",
@@ -9,149 +9,106 @@ const PILLS = [
   "FULL-STACK",
 ];
 
-const TRAITS = ["Systems Over Syntax", "Architecture Over Hype", "Shipping Over Talking"];
-
-// Pixelated Cyberpunk Owl & Branch Component
-const PixelCyberOwl = () => (
-  // ADDED: pointer-events-none so the mouse doesn't get stuck on the owl and break the hover state
-  <div className="absolute -top-[62px] right-4 md:right-10 z-50 pointer-events-none animate-pulse drop-shadow-[0_0_8px_rgba(47,230,217,0.35)]">
-    <svg
-      width="96"
-      height="64"
-      viewBox="0 0 24 16"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ shapeRendering: "crispEdges" }}
-    >
-      {/* Branch */}
-      <rect x="0" y="14" width="24" height="2" fill="var(--line)" />
-      <rect x="18" y="12" width="3" height="2" fill="var(--line)" />
-      <rect x="2" y="15" width="4" height="1" fill="var(--circuit)" opacity="0.4" />
-      <rect x="20" y="15" width="2" height="1" fill="var(--signal)" opacity="0.5" />
-
-      {/* Owl Body (Circuit Cyan) */}
-      <rect x="8" y="6" width="8" height="8" fill="var(--circuit)" />
-      {/* Ears */}
-      <rect x="8" y="4" width="2" height="2" fill="var(--circuit)" />
-      <rect x="14" y="4" width="2" height="2" fill="var(--circuit)" />
-      {/* Inner Body (Dark) */}
-      <rect x="9" y="10" width="6" height="4" fill="var(--bg-panel)" />
-      {/* Eyes (Black with Signal Pink pupil) */}
-      <rect x="9" y="7" width="2" height="2" fill="var(--bg)" />
-      <rect x="9" y="7" width="1" height="1" fill="var(--signal)" />
-      <rect x="13" y="7" width="2" height="2" fill="var(--bg)" />
-      <rect x="13" y="7" width="1" height="1" fill="var(--signal)" />
-      {/* Beak (Solder Yellow) */}
-      <rect x="11" y="9" width="2" height="1" fill="var(--solder)" />
-      {/* Tech details/Wings */}
-      <rect x="7" y="8" width="1" height="4" fill="var(--circuit)" />
-      <rect x="16" y="8" width="1" height="4" fill="var(--circuit)" />
-      <rect x="8" y="11" width="1" height="1" fill="var(--signal)" />
-      <rect x="15" y="11" width="1" height="1" fill="var(--signal)" />
-      {/* Feet */}
-      <rect x="9" y="14" width="2" height="1" fill="var(--solder)" />
-      <rect x="13" y="14" width="2" height="1" fill="var(--solder)" />
-    </svg>
-  </div>
-);
+const TRAITS = [
+  "Research-Oriented",
+  "Builder Mindset",
+  "Performance-Focused",
+];
 
 export default function About() {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-6 py-24">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="ml-6" style={{ fontFamily: 'Impact, sans-serif' }}>
+    <section id="about" className="max-w-7xl mx-auto px-6 pt-24 pb-32 scroll-mt-20">
+      {/* Heading with Cyber Owl perched on top of "ABOUT ME" */}
+      <div className="mb-10">
+        <div className="relative inline-block ml-6" style={{ fontFamily: "Impact, sans-serif" }}>
+          <motion.div
+            whileHover={{ scale: 1.15, y: -4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            className="absolute -top-[50px] sm:-top-[56px] left-1/2 -translate-x-1/2 z-20 cursor-pointer drop-shadow-[0_0_15px_rgba(47,230,217,0.5)]"
+            title="Cyber Owl"
+          >
+            <img
+              src={cyberpunkOwl}
+              alt="Cyberpunk Owl"
+              className="w-14 h-14 sm:w-16 sm:h-16 object-contain select-none pointer-events-none"
+            />
+          </motion.div>
           <GlitchHeading text="ABOUT ME" />
         </div>
-        <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)]" />
       </div>
 
-      <br></br>
-
-      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center mt-8">
-        
-        {/* Wrapper to hold the Owl and the Bio Box together */}
-        <div className="relative">
-          <PixelCyberOwl />
-          
-          {/* Bio box */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="group relative overflow-hidden p-8 bg-[var(--bg-panel)]/60
-              border-2 border-[var(--line)]
-              transition-all duration-300
-              hover:border-[var(--circuit)] 
-              hover:shadow-[0_0_30px_-5px_rgba(47,230,217,0.45)]"
-          >
-            {/* corner ticks only where the glow lives: top-right + bottom-right */}
-            <span className="absolute -top-[1px] -right-[1px] w-4 h-4 border-t-2 border-r-2 border-transparent group-hover:border-[var(--circuit)] transition-colors" />
-            <span className="absolute -bottom-[1px] -right-[1px] w-4 h-4 border-b-2 border-r-2 border-transparent group-hover:border-[var(--circuit)] transition-colors" />
-            {/* Added left corner ticks to match the all-around glow */}
-            <span className="absolute -top-[1px] -left-[1px] w-4 h-4 border-t-2 border-l-2 border-transparent group-hover:border-[var(--circuit)] transition-colors" />
-            <span className="absolute -bottom-[1px] -left-[1px] w-4 h-4 border-b-2 border-l-2 border-transparent group-hover:border-[var(--circuit)] transition-colors" />
-
-            <p className="text-[15px] sm:text-base leading-relaxed text-[var(--ink)]/90 mb-5">
-              I build backend systems, distributed applications, and AI-powered software where architecture matters as much as implementation. My work revolves around designing scalable APIs, integrating intelligent systems, and building software that's meant to survive production—not just a demo.
-            </p>
-            <p className="text-[15px] sm:text-base leading-relaxed text-[var(--ink)]/90 mb-5">
-             I'm an Electronics & Communication student who discovered that I enjoyed designing software systems more than writing isolated programs. That curiosity naturally pulled me toward backend engineering, distributed systems, and applied AI.
-            </p>
-            <p className="text-[15px] sm:text-base leading-relaxed text-[var(--ink)]/90 mb-8">
-              If it involves designing reliable services, building intelligent applications, or solving complex engineering problems through good system design, that's exactly where I want to be.
+      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-8 items-start">
+        {/* Left Card: Main Bio Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="p-8 bg-[#121217] rounded-2xl border border-[#2a2a33] text-[var(--ink)] shadow-xl"
+        >
+            <p className="text-[15px] sm:text-base leading-[1.8] text-[var(--ink)]/90 mb-5">
+              I started in electronics &mdash; debugging circuits, reading datasheets, soldering boards. Somewhere along the way I realized the systems I enjoyed designing most weren&apos;t hardware; they were software architectures that had to stay alive under real traffic, recover from failure on their own, and{" "}
+              <span className="whitespace-nowrap underline decoration-[var(--signal)] decoration-2 underline-offset-4 font-semibold text-white">
+                survive production
+              </span>{" "}
+              without a 3 AM page.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <p className="text-[15px] sm:text-base leading-[1.8] text-[var(--ink)]/90 mb-8">
+              That shift pulled me from breadboards into Spring Boot microservices, Redis-backed rate limiters, and AI pipelines built with LangChain. I&apos;ve shipped a logistics document-AI system that handles thousands of concurrent uploads, a self-healing rate limiter tested with chaos engineering on Kubernetes, and a reinforcement-learning simulation deployed to Hugging Face.
+            </p>
+
+            <div className="flex flex-wrap gap-2.5">
               {PILLS.map((pill) => (
                 <span
                   key={pill}
-                  className="px-4 py-1.5 text-xs font-semibold rounded-full border border-[var(--circuit)]/50 bg-black/30 text-[var(--circuit)]"
+                  className="px-4 py-1.5 text-xs font-mono font-semibold rounded-full border border-[var(--circuit)] bg-black text-white tracking-wider"
                 >
                   {pill}
                 </span>
               ))}
             </div>
           </motion.div>
-        </div>
 
-        {/* Personal Bio note */}
-        <motion.div
-          initial={{ opacity: 0, y: 16, rotate: 0 }}
-          whileInView={{ opacity: 1, y: 0, rotate: 1.5 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="relative bg-[#FFEA00] text-black p-6 brutal-border brutal-shadow flex flex-col"
-        >
-          <div className="flex items-center justify-between mb-3 text-black">
-            <p className="text-sm font-bold uppercase tracking-widest">
-              [ Personal_Bio.log ]
+        {/* Right Card: Portrait Personal Bio Sticky Note */}
+        <div className="flex justify-center lg:justify-start w-full lg:pl-3">
+          <motion.div
+            initial={{ opacity: 0, y: 16, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, rotate: -2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            whileHover={{ rotate: 0, scale: 1.02 }}
+            className="relative w-full max-w-sm sticky-note p-6 z-20 border-4 border-black shadow-[6px_6px_0px_0px_#000000] hover:rotate-0 transition-transform duration-200"
+            style={{ backgroundColor: "var(--spider-yellow, #ffe600)" }}
+          >
+            {/* Scotch tape strip at top */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-14 h-5 bg-white/50 border border-black/10 shadow-sm rotate-[-2deg]" />
+
+            <h3 className="font-handwritten text-headline-md text-black border-b-2 border-black/25 pb-2 mb-4 flex items-center justify-between font-bold">
+              <span>Personal Bio</span>
+              <span className="material-symbols-outlined text-black font-bold select-none text-[24px]">
+                edit_note
+              </span>
+            </h3>
+
+            <p className="font-code-sm text-code-sm text-black italic mb-4 leading-relaxed font-bold">
+              &quot;I&apos;ve made a vow to myself to simplify complex hardware-software interactions and turn theoretical AI models into efficient, real-world edge solutions. I do enjoy quantum mechanics.&quot;
             </p>
-            <NotebookPen size={18} />
-          </div>
-          <hr className="border-black mb-4" />
 
-          <p className="font-mono text-[13.5px] italic leading-relaxed mb-5 border-l-2 border-black pl-3 text-black font-medium">
-            "I've become fascinated by the invisible parts of software - the architecture, the trade-offs, and the systems that quietly keep everything running. I'm happiest when turning complex ideas into software that's simple to use and hard to break."
-          </p>
-
-          <div className="mt-2">
-            <p className="text-[10px] tracking-widest uppercase text-black font-bold mb-2">
-              // Traits
-            </p>
-            <ul className="space-y-1.5 font-mono text-[13px] mb-5 text-black font-semibold">
-              {TRAITS.map((trait) => (
-                <li key={trait} className="flex items-center gap-2">
-                  <span className="text-black font-bold">&gt;</span> {trait}
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-2 text-[10px] font-mono tracking-wide text-black border-t border-black pt-3 font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-black blink-dot" />
-              SYSTEM.READY
+            <div className="mt-6">
+              <h4 className="font-label-caps text-label-caps text-black uppercase mb-2 font-bold">
+                Traits
+              </h4>
+              <ul className="font-code-sm text-[13px] text-black space-y-1 list-none font-bold">
+                {TRAITS.map((trait) => (
+                  <li key={trait} className="flex items-center gap-1">
+                    <span className="text-spider-magenta font-extrabold">&gt;</span> {trait}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

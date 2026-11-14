@@ -53,15 +53,15 @@ export default function BootTerminal({
         transition: { duration: 0.4 },
       }}
       className={`w-full max-w-xl brutal-border bg-[var(--bg-panel)] ${className}`}
-      style={{ boxShadow: `8px 8px 0px 0px ${edge}` }}
+      style={{ boxShadow: `6px 6px 0px 0px ${edge}` }}
     >
-      <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-black bg-[var(--bg-panel-2)]">
-        <span className="w-3 h-3 rounded-full bg-[var(--signal)]" />
-        <span className="w-3 h-3 rounded-full bg-[var(--solder)]" />
-        <span className="w-3 h-3 rounded-full bg-[var(--circuit)]" />
-        <span className="ml-3 text-xs text-[var(--ink-dim)]">{label}</span>
+      <div className="flex items-center gap-2 px-3 py-2 border-b-2 border-black bg-[var(--bg-panel-2)]">
+        <span className="w-2.5 h-2.5 rounded-full bg-[var(--signal)]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[var(--solder)]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[var(--circuit)]" />
+        <span className="ml-2 text-[11px] text-[var(--ink-dim)]">{label}</span>
       </div>
-      <div className="p-5 min-h-[168px] text-sm space-y-1.5">
+      <div className="px-4 py-3 min-h-[120px] text-xs space-y-1">
         {lines.map((line, idx) => (
           <TypedLine
             key={line.text}
@@ -75,7 +75,7 @@ export default function BootTerminal({
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-[var(--ink)] pt-1"
+            className="text-[var(--ink)] pt-0.5"
           >
             _
           </motion.p>

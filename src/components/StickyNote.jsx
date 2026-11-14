@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 const COLORS = {
-  amber: "bg-[var(--solder)] text-black",
-  cyan: "bg-[var(--circuit)] text-black",
+  amber: "bg-[var(--solder)]",
+  cyan: "bg-[var(--circuit)]",
 };
 
 export default function StickyNote({
@@ -30,9 +30,9 @@ export default function StickyNote({
       {/* tape */}
       <span className="absolute -top-3 left-1/2 -translate-x-1/2 w-14 h-5 bg-white/40 border border-black/20 rotate-2" />
       {title && (
-        <p className="font-hand text-2xl leading-none mb-2">{title}</p>
+        <p className="font-hand text-2xl leading-none mb-2 text-black">{title}</p>
       )}
-      <div className="text-xs leading-relaxed">{children}</div>
+      <div className="text-[13px] leading-relaxed font-medium text-black/85">{children}</div>
       <span className="absolute bottom-1.5 right-2 text-[10px] opacity-60">
        
       </span>

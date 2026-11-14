@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" role="img" aria-labelledby="title desc">
+  <title id="title">Neon cyberpunk owl</title>
+  <desc id="desc">A floating, geometric cyberpunk owl with cyan armor, magenta details and animated blinking amber eyes. Transparent background.</desc>
+  <defs>
+    <filter id="cyanGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="pinkGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="armor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8afff1"/>
+      <stop offset=".48" stop-color="#14e8d1"/>
+      <stop offset="1" stop-color="#087d9b"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#202d48"/>
+      <stop offset="1" stop-color="#0a1224"/>
+    </linearGradient>
+    <clipPath id="faceClip">
+      <path d="M57 78 85 55H155L183 78 176 143 150 168H90L64 143Z"/>
+    </clipPath>
+  </defs>
+
+  <g class="owl">
+    <!-- Ear fins -->
+    <path d="M57 83 34 35 83 61 91 91Z" fill="#0b8791" stroke="#36ffe4" stroke-width="3" stroke-linejoin="round" filter="url(#cyanGlow)"/>
+    <path d="m183 83 23-48-49 26-8 30Z" fill="#0b8791" stroke="#36ffe4" stroke-width="3" stroke-linejoin="round" filter="url(#cyanGlow)"/>
+    <path d="m47 48 29 18-12 7Z" fill="#ff3f9d"/>
+    <path d="m193 48-29 18 12 7Z" fill="#ff3f9d"/>
+
+    <!-- Main armored head -->
+    <path d="M57 78 85 55H155L183 78 176 143 150 168H90L64 143Z"
+          fill="url(#armor)" stroke="#70fff0" stroke-width="3" stroke-linejoin="round" filter="url(#cyanGlow)"/>
+    <path d="M68 84 91 65H149L172 84 165 137 145 156H95L75 137Z"
+          fill="url(#face)" stroke="#1a9eaa" stroke-width="2"/>
+
+    <!-- Brow armor -->
+    <path d="M75 83 97 70H143L165 83 153 92H87Z" fill="#0b526d"/>
+    <path d="M79 81 98 72H116L105 82Z" fill="#6bfff0"/>
+    <path d="M161 81 142 72H124L135 82Z" fill="#6bfff0"/>
+
+    <!-- Eye animation -->
+    <g clip-path="url(#faceClip)">
+      <g class="eyes-open">
+        <path d="M80 94 91 85H111L122 96V119L111 130H91L80 119Z" fill="#ffbd3f" filter="url(#pinkGlow)"/>
+        <path d="M118 96 129 85H149L160 94V119L149 130H129L118 119Z" fill="#ffbd3f" filter="url(#pinkGlow)"/>
+        <path d="M96 94H107V119H96Z" fill="#081322"/>
+        <path d="M133 94H144V119H133Z" fill="#081322"/>
+        <path d="M87 91H101V96H87Z" fill="#fff3a0"/>
+        <path d="M124 91H138V96H124Z" fill="#fff3a0"/>
+      </g>
+      <g class="eyes-closed">
+        <path d="M80 104H122V112H80Z" fill="#ffbd3f"/>
+        <path d="M118 104H160V112H118Z" fill="#ffbd3f"/>
+        <path d="M84 112H118V116H84ZM122 112H156V116H122Z" fill="#ff4d9f"/>
+      </g>
+    </g>
+
+    <!-- Cheek plates -->
+    <path d="M66 116 83 124 91 145 73 139Z" fill="#087c91" stroke="#2fffe0" stroke-width="2"/>
+    <path d="m174 116-17 8-8 21 18-6Z" fill="#087c91" stroke="#2fffe0" stroke-width="2"/>
+    <path d="M70 128 82 133" stroke="#ff4c9d" stroke-width="3"/>
+    <path d="m170 128-12 5" stroke="#ff4c9d" stroke-width="3"/>
+
+    <!-- Beak and lower face -->
+    <path d="M108 119H132L120 139Z" fill="#ffb52e" stroke="#ffe078" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M120 139 108 151H132Z" fill="#0a526a"/>
+    <path d="M92 157 105 164H135L148 157" fill="none" stroke="#39f5df" stroke-width="4" stroke-linecap="square"/>
+
+    <!-- Cybernetic side markings -->
+    <path d="M58 101H70M170 101H182" stroke="#ff3f9d" stroke-width="4"/>
+    <path d="M62 108H70M170 108H178" stroke="#7affed" stroke-width="2"/>
+    <circle cx="70" cy="91" r="3" fill="#ff4f9f"/>
+    <circle cx="170" cy="91" r="3" fill="#ff4f9f"/>
+
+    <!-- Small chest / neck detail -->
+    <path d="M101 169 110 178H130L139 169" fill="#0b6477" stroke="#2bf5df" stroke-width="2"/>
+    <path d="M115 171H125V177H115Z" fill="#ff4b9c"/>
+  </g>
+
+  <!-- Floating signal pixels, no backdrop -->
+  <g filter="url(#cyanGlow)">
+    <path d="M24 102h9v3h-9zM207 118h8v3h-8zM42 151h5v5h-5z" fill="#25f5dc"/>
+    <path d="M197 62h5v5h-5zM30 69h4v4h-4z" fill="#ff4a9e" filter="url(#pinkGlow)"/>
+  </g>
+
+  <style>
+    .eyes-open { animation: eyeBlink 4.6s infinite; }
+    .eyes-closed { opacity: 0; animation: eyeClose 4.6s infinite; }
+    @keyframes eyeBlink {
+      0%, 43%, 47%, 78%, 82%, 100% { opacity: 1; }
+      45%, 80% { opacity: 0; }
+    }
+    @keyframes eyeClose {
+      0%, 43%, 47%, 78%, 82%, 100% { opacity: 0; }
+      45%, 80% { opacity: 1; }
+    }
+    @keyframes hover {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .owl { transform-box: fill-box; transform-origin: center; animation: hover 3.4s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .eyes-open, .eyes-closed, .owl { animation: none; }
+      .eyes-open { opacity: 1; }
+      .eyes-closed { opacity: 0; }
+    }
+  </style>
+</svg>

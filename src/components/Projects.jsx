@@ -9,6 +9,8 @@ import {
 import GlitchHeading from "./GlitchHeading";
 import MoreCreationsModal from "./MoreCreationsModal";
 import { useState } from "react";
+import cyberpunkWolf from "../assets/gifs/cyberpunk_wolf.gif";
+import cyberpunkWolfStatic from "../assets/gifs/cyberpunk_wolf-static.png";
 
 // How many additional projects exist beyond the three featured below.
 // Update this once the rest of the project list is wired up.
@@ -46,53 +48,30 @@ function CardFrame({ children, className = "" }) {
   );
 }
 
-// 8-Bit Cyber Panda sitting on a Half-Park-Tyre Swing over Card 2
-const PixelCyberPandaTyreSwing = () => (
+// Cyberpunk Wolf aligned to the heading's baseline
+const CyberWolf = () => (
   <motion.div 
-    className="absolute -top-[68px] right-6 md:right-12 z-50 pointer-events-none drop-shadow-[0_0_10px_rgba(0,255,159,0.35)]"
-    animate={{ rotate: [-2, 2, -2] }}
-    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-    style={{ transformOrigin: "top center" }}
+    className="cursor-pointer drop-shadow-[0_0_12px_rgba(2,243,246,0.35)] shrink-0 select-none self-baseline"
+    whileHover={{ scale: 1.15, y: -4 }}
+    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+    title="Cyberpunk Wolf"
   >
-    <svg
-      width="96"
-      height="80"
-      viewBox="0 0 48 40"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ shapeRendering: "crispEdges" }}
-    >
-      {/* Swing Ropes hanging from top */}
-      <rect x="14" y="0" width="1" height="20" fill="var(--line)" />
-      <rect x="33" y="0" width="1" height="20" fill="var(--line)" />
-
-      {/* Half-Park-Tyre (Suspended structure) */}
-      <rect x="10" y="20" width="28" height="10" fill="#1a1a1a" />
-      <rect x="13" y="22" width="22" height="6" fill="var(--bg)" />
-      <rect x="12" y="20" width="2" height="10" fill="#333" />
-      <rect x="34" y="20" width="2" height="10" fill="#333" />
-      <rect x="22" y="20" width="4" height="2" fill="var(--circuit)" opacity="0.6" />
-
-      {/* Panda sitting comfortably inside the tyre swing */}
-      <rect x="16" y="7" width="4" height="4" fill="#050505" />
-      <rect x="28" y="7" width="4" height="4" fill="#050505" />
-      
-      <rect x="16" y="10" width="16" height="10" fill="var(--ink)" />
-      
-      <rect x="17" y="12" width="4" height="4" fill="#050505" />
-      <rect x="27" y="12" width="4" height="4" fill="#050505" />
-      
-      <rect x="19" y="13" width="1" height="1" fill="var(--signal)" className="animate-pulse" />
-      <rect x="28" y="13" width="1" height="1" fill="var(--signal)" className="animate-pulse" />
-      
-      <rect x="23" y="15" width="2" height="1" fill="#050505" />
-      
-      <rect x="15" y="19" width="18" height="6" fill="#050505" />
-      <rect x="19" y="20" width="10" height="4" fill="var(--ink)" />
-      
-      <rect x="25" y="14" width="2" height="10" fill="#00ff9f" />
-      <rect x="27" y="16" width="3" height="1" fill="#00ff9f" />
-      <rect x="27" y="18" width="2" height="1" fill="#00ff9f" />
-    </svg>
+    <picture>
+      <source
+        srcSet={cyberpunkWolfStatic}
+        media="(prefers-reduced-motion: reduce)"
+      />
+      <img
+        src={cyberpunkWolf}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        width={443}
+        height={394}
+        className="h-[52px] sm:h-[64px] lg:h-[74px] w-auto object-contain pointer-events-none block translate-y-[7px] sm:translate-y-[9px]"
+        style={{ imageRendering: "pixelated" }}
+      />
+    </picture>
   </motion.div>
 );
 
@@ -101,7 +80,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="max-w-7xl mx-auto px-6 py-24">
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex flex-wrap items-baseline gap-3 sm:gap-5 mb-4">
         <div 
           className="ml-6" 
           style={{ 
@@ -112,7 +91,7 @@ export default function Projects() {
         >
           <GlitchHeading text="FEATURED PROJECTS" />
         </div>
-        <span className="hidden sm:block flex-1 border-t-2 border-dashed border-[var(--line)]" />
+        <CyberWolf />
       </div>
       <br></br>
 
@@ -160,63 +139,60 @@ export default function Projects() {
           </div>
         </CardFrame>
 
-        {/* Card 2: Meridian (With Cyber Panda on Tyre Swing) */}
-        <div className="relative h-full pt-6">
-          <PixelCyberPandaTyreSwing />
-          <CardFrame className="p-7 h-full">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-bold tracking-tight cyber-title">MERIDIAN</h3>
-              <FileScan className="text-[var(--circuit)] shrink-0 ml-3" size={20} />
-            </div>
-            <p className="text-sm text-[var(--ink-dim)] leading-relaxed mb-5">
-              Logistics document AI: reads Bills of Lading, invoices, and
-              packing lists, extracts the data, then validates it against a
-              carrier database automatically.
-            </p>
+        {/* Card 2: Meridian */}
+        <CardFrame className="p-7 h-full">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-xl font-bold tracking-tight cyber-title">MERIDIAN</h3>
+            <FileScan className="text-[var(--circuit)] shrink-0 ml-3" size={20} />
+          </div>
+          <p className="text-sm text-[var(--ink-dim)] leading-relaxed mb-5">
+            Logistics document AI: reads Bills of Lading, invoices, and
+            packing lists, extracts the data, then validates it against a
+            carrier database automatically.
+          </p>
 
-            <div className="mb-5 p-3 bg-black/30 border border-[var(--line)]">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--signal)] blink-dot" />
-                <span className="text-[10px] font-bold tracking-wide text-black bg-[var(--signal)] px-1.5 py-0.5">
-                  LIVE
-                </span>
-                <span className="text-[10px] font-mono text-[var(--ink-dim)]">
-                  doc_review.dashboard
-                </span>
+          <div className="mb-5 p-3 bg-black/30 border border-[var(--line)]">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-[var(--signal)] blink-dot" />
+              <span className="text-[10px] font-bold tracking-wide text-black bg-[var(--signal)] px-1.5 py-0.5">
+                LIVE
+              </span>
+              <span className="text-[10px] font-mono text-[var(--ink-dim)]">
+                doc_review.dashboard
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="h-20 border border-[var(--line)] flex items-center justify-center text-[9px] font-mono text-[var(--ink-dim)]">
+                original document
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="h-20 border border-[var(--line)] flex items-center justify-center text-[9px] font-mono text-[var(--ink-dim)]">
-                  original document
-                </div>
-                <div className="h-20 border border-[var(--circuit)]/50 flex items-center justify-center text-[9px] font-mono text-[var(--circuit)]">
-                  extracted data · 96%
-                </div>
+              <div className="h-20 border border-[var(--circuit)]/50 flex items-center justify-center text-[9px] font-mono text-[var(--circuit)]">
+                extracted data · 96%
               </div>
             </div>
+          </div>
 
-            <ul className="text-sm text-[var(--ink)]/90 space-y-2 mb-5">
-              <li>
-                — Handles thousands of concurrent uploads via Java 21 virtual
-                threads with near-zero overhead
-              </li>
-              <li>
-                — One-click export to Excel, CSV, or JSON with real-time
-                confidence scoring
-              </li>
-            </ul>
+          <ul className="text-sm text-[var(--ink)]/90 space-y-2 mb-5">
+            <li>
+              — Handles thousands of concurrent uploads via Java 21 virtual
+              threads with near-zero overhead
+            </li>
+            <li>
+              — One-click export to Excel, CSV, or JSON with real-time
+              confidence scoring
+            </li>
+          </ul>
 
-            <div className="flex flex-wrap gap-2 mb-4 mt-auto">
-              <TechPill>Java 21</TechPill>
-              <TechPill>Spring AI</TechPill>
-              <TechPill>PostgreSQL</TechPill>
-              <TechPill>React</TechPill>
-            </div>
+          <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+            <TechPill>Java 21</TechPill>
+            <TechPill>Spring AI</TechPill>
+            <TechPill>PostgreSQL</TechPill>
+            <TechPill>React</TechPill>
+          </div>
 
-            <p className="text-xs font-mono text-[var(--ink-dim)] border-t border-[var(--line)] pt-3 mt-4">
-              &gt; Validating against carrier database...
-            </p>
-          </CardFrame>
-        </div>
+          <p className="text-xs font-mono text-[var(--ink-dim)] border-t border-[var(--line)] pt-3 mt-4">
+            &gt; Validating against carrier database...
+          </p>
+        </CardFrame>
       </div>
 
       {/* Full-width feature card: Virtual Power Plant RL Environment */}
