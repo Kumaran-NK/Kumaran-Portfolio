@@ -48,15 +48,23 @@ export default function About() {
           className="p-8 bg-[#121217] rounded-2xl border border-[#2a2a33] text-[var(--ink)] shadow-xl"
         >
             <p className="text-[15px] sm:text-base leading-[1.8] text-[var(--ink)]/90 mb-5">
-              I started in electronics &mdash; debugging circuits, reading datasheets, soldering boards. Somewhere along the way I realized the systems I enjoyed designing most weren&apos;t hardware; they were software architectures that had to stay alive under real traffic, recover from failure on their own, and{" "}
-              <span className="whitespace-nowrap underline decoration-[var(--signal)] decoration-2 underline-offset-4 font-semibold text-white">
-                survive production
-              </span>{" "}
-              without a 3 AM page.
+              I started in electronics &mdash; debugging circuits, reading datasheets, soldering boards. Somewhere along the way I realized the systems I enjoyed designing most weren&apos;t hardware; they were software architectures that had to stay alive under real traffic, recover from failure on their own, and survive production without a 3 AM page.
             </p>
 
             <p className="text-[15px] sm:text-base leading-[1.8] text-[var(--ink)]/90 mb-8">
-              That shift pulled me from breadboards into Spring Boot microservices, Redis-backed rate limiters, and AI pipelines. I&apos;ve shipped a self-healing rate limiter that chaos-tested its own recovery on Kubernetes and a reinforcement-learning simulation for grid-scale battery control deployed to Hugging Face.
+              That shift pulled me from breadboards into{" "}
+              <span className="underline decoration-[var(--signal)] decoration-2 underline-offset-4 font-semibold text-white">
+                Spring Boot microservices
+              </span>
+              ,{" "}
+              <span className="underline decoration-[var(--signal)] decoration-2 underline-offset-4 font-semibold text-white">
+                Redis-backed rate limiters
+              </span>
+              , and{" "}
+              <span className="underline decoration-[var(--signal)] decoration-2 underline-offset-4 font-semibold text-white">
+                AI pipelines
+              </span>
+              . I&apos;ve shipped a self-healing rate limiter that chaos-tested its own recovery on Kubernetes and a reinforcement-learning simulation for grid-scale battery control deployed to Hugging Face.
             </p>
 
             <div className="flex flex-wrap gap-2.5">

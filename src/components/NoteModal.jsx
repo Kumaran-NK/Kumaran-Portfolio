@@ -1,9 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-export default function NoteModal({ open, onClose, title, accent = "amber", children }) {
-  const accentVar = accent === "cyan" ? "var(--circuit)" : "var(--solder)";
-
+export default function NoteModal({ open, onClose, title, children }) {
   return (
     <AnimatePresence>
       {open && (

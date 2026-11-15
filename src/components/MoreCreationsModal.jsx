@@ -343,7 +343,8 @@ export default function MoreCreationsModal({ open, onClose, onOpenDetail }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex justify-center px-4 py-10 bg-black/75 backdrop-blur-sm overflow-y-auto"
+          className="fixed inset-0 z-[100] flex justify-center px-4 py-10 bg-black/75 backdrop-blur-sm overflow-y-auto no-scrollbar"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           onClick={onClose}
           aria-hidden="true"
         >

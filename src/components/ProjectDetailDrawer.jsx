@@ -1,20 +1,22 @@
 import { useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ExternalLink, Code2 } from "lucide-react";
 import { ACCENT_CSS } from "../data/projects";
 import ProjectVisual from "./ProjectVisual";
 
 /**
- * Right-side drawer on desktop, full-screen sheet on mobile.
- * Terminal-window styling with focus trap, Esc close, body scroll lock.
+ * Centered detail modal for project deep-dive.
+ * Styled with terminal-window chrome, focus trap, Esc close, body scroll lock.
+ * Rendered via React Portal into document.body for clean stacking.
  * Sections in order: Overview > The problem > What I built > Architecture >
  * Key decisions > Proof > Tech stack > Links.
  */
 export default function ProjectDetailDrawer({ project, open, onClose }) {
-  const drawerRef = useRef(null);
+  const modalRef = useRef(null);
   const triggerRef = useRef(null);
 
-  // Capture the element that opened the drawer
+  // Capture the element that opened the modal
   useEffect(() => {
     if (open) {
       triggerRef.current = document.activeElement;
@@ -38,8 +40,8 @@ export default function ProjectDetailDrawer({ project, open, onClose }) {
         onClose();
         return;
       }
-      if (e.key === "Tab" && drawerRef.current) {
-        const focusable = drawerRef.current.querySelectorAll(
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll(
           'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
         );
         if (focusable.length === 0) return;
@@ -67,10 +69,10 @@ export default function ProjectDetailDrawer({ project, open, onClose }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, handleKeyDown]);
 
-  // Focus the drawer on open
+  // Focus the modal on open
   useEffect(() => {
-    if (open && drawerRef.current) {
-      drawerRef.current.focus();
+    if (open && modalRef.current) {
+      modalRef.current.focus();
     }
   }, [open]);
 
@@ -86,35 +88,36 @@ export default function ProjectDetailDrawer({ project, open, onClose }) {
 
   const accent = ACCENT_CSS[project.accent] || "var(--circuit)";
 
-  return (
+  const content = (
     <AnimatePresence>
       {open && (
-        <>
-          {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[300] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md cursor-pointer select-none"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${project.title} — project details`}
+        >
+          {/* Centered Modal Card */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm"
-            onClick={onClose}
-            aria-hidden="true"
-          />
-
-          {/* Drawer: Right-side on desktop (w-[520px]/w-[580px]), full-screen sheet on mobile (w-full) */}
-          <motion.div
-            ref={drawerRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${project.title} — project details`}
+            ref={modalRef}
             tabIndex={-1}
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed top-0 right-0 z-[201] h-full w-full sm:w-[520px] lg:w-[600px] bg-[var(--bg)] border-l-2 border-[var(--line)] overflow-y-auto no-scrollbar shadow-2xl"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 16 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl lg:max-w-4xl max-h-[88vh] flex flex-col rounded-xl overflow-hidden bg-[var(--bg)] border-2 cursor-default select-text shadow-2xl"
+            style={{
+              borderColor: accent,
+              boxShadow: `0 0 45px -10px ${accent}50, 0 20px 40px rgba(0,0,0,0.9)`,
+            }}
           >
             {/* Terminal chrome header */}
-            <div className="sticky top-0 z-10 flex items-center gap-2 px-5 py-3 border-b-2 border-black bg-[var(--bg-panel-2)]">
+            <div className="sticky top-0 z-10 flex items-center gap-2 px-5 py-3 border-b-2 border-black bg-[var(--bg-panel-2)] shrink-0">
               <span className="w-2.5 h-2.5 rounded-full bg-[var(--signal)]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[var(--solder)]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[var(--circuit)]" />
@@ -124,23 +127,26 @@ export default function ProjectDetailDrawer({ project, open, onClose }) {
               <button
                 onClick={onClose}
                 aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--signal)] text-white hover:brightness-110 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--solder)]"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--signal)] text-white hover:brightness-110 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--solder)] cursor-pointer shadow"
               >
                 <X size={16} />
               </button>
             </div>
 
-            {/* Content body */}
-            <div className="p-6 sm:p-8 space-y-7 font-mono text-sm">
+            {/* Scrollable Content body */}
+            <div
+              className="p-6 sm:p-8 space-y-7 font-mono text-sm overflow-y-auto no-scrollbar min-h-0"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
               {/* Badge + Title + Tagline */}
               <div>
                 <span
-                  className="inline-block text-[10px] font-bold px-2 py-0.5 rounded mb-2 tracking-wide font-mono"
+                  className="inline-block text-[10px] font-bold px-2 py-0.5 rounded mb-2 tracking-wide font-mono uppercase"
                   style={{ backgroundColor: accent, color: "#0a0a0e" }}
                 >
                   {project.badge}
                 </span>
-                <h2 className="text-xl font-bold tracking-tight cyber-title mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight cyber-title mt-1">
                   {project.title}
                 </h2>
                 <p className="text-xs text-[var(--ink-dim)] mt-1.5 italic">
@@ -192,7 +198,7 @@ export default function ProjectDetailDrawer({ project, open, onClose }) {
                 </Section>
               )}
 
-              {/* 5. Key decisions (rendered as small "decision > reason" list, title bold, why below) */}
+              {/* 5. Key decisions */}
               {project.decisions && project.decisions.length > 0 && (
                 <Section title="Key decisions">
                   <div className="space-y-3">
@@ -276,10 +282,12 @@ export default function ProjectDetailDrawer({ project, open, onClose }) {
               </div>
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
+
+  return createPortal(content, document.body);
 }
 
 function Section({ title, children }) {

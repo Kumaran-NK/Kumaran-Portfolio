@@ -69,9 +69,10 @@ export default function SignOff() {
       className="mt-28 flex flex-col items-center justify-center gap-3 text-center"
       style={{ fontFamily: '"Space Grotesk", "Impact", "Arial Black", sans-serif' }}
     >
-      {/* Line 1: EDGING AI — glitch-styled, cyan with magenta+black shadows */}
+      {/* Line 1: PUSHING AI — glitch-styled, cyan with magenta+black shadows */}
       <h3
         ref={line1Ref}
+        data-text="PUSHING AI"
         className="signoff-glitch text-3xl sm:text-4xl md:text-[46px] uppercase tracking-tight font-extrabold origin-center leading-none"
         style={{
           color: "#00f5ff",
@@ -79,10 +80,10 @@ export default function SignOff() {
           willChange: "transform, filter, opacity",
         }}
       >
-        EDGING AI
+        PUSHING AI
       </h3>
 
-      {/* Line 2: TO ITS PEAK, — black pill with magenta box-shadow */}
+      {/* Line 2: TO THE EDGE, — black pill with magenta box-shadow */}
       <h3
         ref={line2Ref}
         className="text-xl sm:text-2xl md:text-[30px] uppercase tracking-tight font-extrabold px-4 py-1 my-1 bg-black text-white origin-center border-4 border-black rotate-1 inline-block"
@@ -91,12 +92,13 @@ export default function SignOff() {
           willChange: "transform, filter, opacity",
         }}
       >
-        TO ITS PEAK,
+        TO THE EDGE,
       </h3>
 
       {/* Line 3: CALL ME AN EDGERUNNER. — yellow with blue shadow */}
       <h3
         ref={line3Ref}
+        data-text="CALL ME AN EDGERUNNER."
         className="signoff-glitch text-3xl sm:text-4xl md:text-[44px] uppercase tracking-tight font-extrabold origin-center leading-none"
         style={{
           color: "#ffe600",

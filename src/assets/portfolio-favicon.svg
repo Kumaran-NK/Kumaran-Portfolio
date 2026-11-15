@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00F5E9"/>
+      <stop offset="1" stop-color="#087BFF"/>
+    </linearGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.55" stop-color="#F0F2FF"/>
+      <stop offset="1" stop-color="#C9D5F4"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#245CFF"/>
+      <stop offset="0.55" stop-color="#852BFF"/>
+      <stop offset="1" stop-color="#E000FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Upper cyan stroke -->
+  <path d="M343 333 H530 V422 L345 638 Z" fill="url(#cyan)"/>
+
+  <!-- Main silver diagonal and lower-left stem -->
+  <path d="M346 692 L530 485 V757 L347 936 Z" fill="url(#ice)"/>
+
+  <!-- Upper arm of the K -->
+  <path d="M530 537 L713 335 H938 L530 757 Z" fill="url(#ice)"/>
+
+  <!-- Lower arm of the K -->
+  <path d="M571 755 L703 632 L960 916 H719 Z" fill="url(#violet)"/>
+</svg>

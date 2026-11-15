@@ -199,7 +199,7 @@ export default function Contact() {
               <svg
                 viewBox="0 0 100 80"
                 fill="none"
-                className="absolute -top-1 -right-1 w-32 h-26 text-[#ff006e] opacity-20 pointer-events-none select-none"
+                className="absolute top-1 right-1 w-20 h-16 text-[#ff006e] opacity-20 pointer-events-none select-none"
               >
                 <rect x="2" y="2" width="96" height="76" rx="14" stroke="currentColor" strokeWidth="4" />
                 <circle cx="34" cy="30" r="12" fill="currentColor" />

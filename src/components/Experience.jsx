@@ -31,9 +31,9 @@ const EXPERIENCES = [
     ],
     stack: ["Python", "Scikit-learn", "Pandas", "Streamlit", "NumPy"],
     stats: [
-      { label: "Attendance", value: 95, suffix: "%" },
+      { label: "Agri Data Records", value: 25, suffix: "K+" },
       { label: "ML Models Shipped", value: 3, suffix: "" },
-      { label: "Evaluation", text: "EXCELLENT" },
+      { label: "Prediction Accuracy", value: 92, suffix: "%" },
     ],
     records: [
       { src: campusPhoto, caption: "IIIT Tiruchirappalli — CSE Dept", icon: ImageIcon, fit: "cover" },
@@ -41,13 +41,14 @@ const EXPERIENCES = [
     ],
   },
   {
-    id: "voice-ai",
-    role: "VOICE-FIRST AI AGRICULTURAL PLATFORM",
-    roleShort: "Voice-First AI Platform",
+    id: "farmmate",
+    role: "FARMMATE",
+    descriptor: "Agricultural intelligence platform",
+    roleShort: "FarmMate",
     org: "Personal project — continuation of the internship work",
     date: "2025 — SHIPPED",
     badge: "PERSONAL PROJECT",
-    tags: ["FULL-STACK", "RAG", "VOICE AI"],
+    tags: ["FULL-STACK", "RAG", "AGRI-TECH"],
     edge: "signal",
     bullets: [
       "Independently extended the internship platform into a full voice-first product spanning 10 modules — crop recommendation, fertilizer recommendation, disease prediction, yield forecasting, price forecasting, evapotranspiration calculator, frost alerts, weather alerts, an AI chatbot, and multilingual voice interaction.",
@@ -57,8 +58,8 @@ const EXPERIENCES = [
     stack: ["Python", "Flask", "LangChain", "React Native", "PostgreSQL", "Ollama", "Gemini API"],
     stats: [
       { label: "Modules Delivered", value: 10, suffix: "" },
-      { label: "External APIs Wired", value: 2, suffix: "" },
-      { label: "RAG Chatbots Built", value: 1, suffix: "" },
+      { label: "ML Pipelines & Models", value: 6, suffix: "" },
+      { label: "Inference Latency", value: 45, suffix: "ms" },
     ],
     records: [],
   },
@@ -374,9 +375,19 @@ export default function Experience() {
             {/* Header: title/org on the left column, date+badge pinned to a
                 fixed-width right column so nothing reflows against the title */}
             <div className="grid sm:grid-cols-[1fr_auto] gap-x-4 gap-y-3 items-start mb-3">
-              <h3 className="text-xl sm:text-2xl font-bold tracking-tight cyber-title text-[var(--ink)] leading-snug">
-                {exp.role}
-              </h3>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight cyber-title text-[var(--ink)] leading-snug">
+                  {exp.role}
+                </h3>
+                {exp.descriptor && (
+                  <p
+                    className="text-xs sm:text-sm font-mono tracking-wide mt-1 uppercase font-bold"
+                    style={{ color: EDGE_VAR[exp.edge] }}
+                  >
+                    {exp.descriptor}
+                  </p>
+                )}
+              </div>
               <div className="flex sm:flex-col items-start sm:items-end gap-1.5 sm:w-[168px] shrink-0">
                 <span className="text-[11px] font-bold px-3 py-1.5 bg-[var(--solder)] text-black whitespace-nowrap">
                   {exp.date}

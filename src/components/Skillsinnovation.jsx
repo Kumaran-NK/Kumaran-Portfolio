@@ -203,7 +203,7 @@ const FOCUS_LINES = [
   { text: "> BACKEND SYSTEMS & DISTRIBUTED ARCHITECTURE [Active]", color: "text-[var(--circuit)]" },
   { text: "> APPLIED AI / LLM INTEGRATION [Active]", color: "text-[var(--circuit)]" },
   { text: "> FRAUD DETECTION + RL SIMULATION [Shipping]", color: "text-[var(--signal)]" },
-  { text: "> OPEN SOURCE — GSoC [Contributing]", color: "text-[var(--signal)]" },
+  { text: "> OPEN SOURCE CONTRIBUTING", color: "text-[var(--signal)]" },
 ];
 
 /* ------------------------------------------------------------------ */

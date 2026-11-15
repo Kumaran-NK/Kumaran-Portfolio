@@ -25,8 +25,8 @@ export default function CurrentModal({ open, onClose }) {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[var(--bg-panel)] brutal-border"
-            style={{ boxShadow: "10px 10px 0 var(--circuit)" }}
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto no-scrollbar bg-[var(--bg-panel)] brutal-border"
+            style={{ boxShadow: "10px 10px 0 var(--circuit)", scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             <button
               onClick={onClose}
