@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Code2, Link2, ArrowDown } from "lucide-react";
 import StickyNote from "./StickyNote";
 import BootTerminal from "./BootTerminal";
-import EducationModal from "./EducationModal";
+import EducationModal from "./Educationmodal";
 import kumaranPhoto from "../assets/photos/Kumaran.png";
 
 import CurrentModal from "./CurrentModal";

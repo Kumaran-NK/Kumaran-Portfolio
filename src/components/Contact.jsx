@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import { Mail, MapPin } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaReddit } from "react-icons/fa6";
 import GlitchHeading from "./GlitchHeading";
-import SignOff from "./SignOff";
+import SignOff from "./Signoff";
 import cyberpunkPigeon from "../assets/gifs/cyberpunk_pigeon.gif";
 
 const EMAIL = "kumarannk95@gmail.com";
