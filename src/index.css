@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --color-spider-cyan: #00f5ff;
+  --color-spider-magenta: #ff006e;
+  --color-spider-yellow: #ffe600;
+  --color-spider-black: #050505;
+}
+
+.placeholder-white\/30::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1;
+}
+
 :root {
   --bg: #0a0a0e;
   --bg-panel: #131318;
@@ -74,6 +86,59 @@ body {
   line-height: 1.2;
 }
 
+.font-headline-md {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.glitch-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text-clone {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+.glitch-magenta {
+  color: var(--spider-magenta, #ff006e);
+  z-index: -1;
+  transform: translate(-2px, -1px);
+  opacity: 0.75;
+  animation: 2s linear 0s infinite alternate-reverse none running glitch-anim-1;
+}
+
+.glitch-cyan {
+  color: var(--spider-cyan, #00f5ff);
+  z-index: -2;
+  transform: translate(2px, 1px);
+  opacity: 0.75;
+  animation: 2s linear 0s infinite alternate-reverse none running glitch-anim-2;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(40% 0px 61%); }
+  20% { clip-path: inset(92% 0px 1%); }
+  40% { clip-path: inset(15% 0px 80%); }
+  60% { clip-path: inset(80% 0px 5%); }
+  80% { clip-path: inset(5% 0px 92%); }
+  100% { clip-path: inset(61% 0px 40%); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(25% 0px 58%); }
+  20% { clip-path: inset(64% 0px 25%); }
+  40% { clip-path: inset(5% 0px 92%); }
+  60% { clip-path: inset(92% 0px 5%); }
+  80% { clip-path: inset(55% 0px 15%); }
+  100% { clip-path: inset(82% 0px 10%); }
+}
+
 .text-spider-magenta {
   color: var(--spider-magenta, #ff006e);
 }
@@ -136,74 +201,79 @@ body {
   outline-offset: 2px;
 }
 
-/* Animated cyberpunk glitch heading: stacked hard shadow, pixelated edges */
-.glitch-heading {
+/* Animated cyberpunk glitch heading — reference-matched clone layers */
+.glitch-wrapper {
   position: relative;
   display: inline-block;
-  font-family: "Impact", sans-serif;
-  font-weight: 500; 
-  letter-spacing: normal;
-  color: var(--neon-cyan);
-  
-  /* 1. Stacked Hard Shadows: Magenta offset, then Black offset further */
-  text-shadow: 
-    3px 3px 0px var(--neon-magenta),
-    6px 6px 0px #000000;
-  
-  /* 2. Force jagged, pixelated edges (no anti-aliasing) */
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: unset;
-  font-smooth: never;
+  font-family: "Space Grotesk", "Impact", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--neon-cyan, #00f5ff);
+  text-transform: uppercase;
+
+  /* Stacked hard shadows: cyan offset, magenta offset, black depth */
+  text-shadow:
+    -2px -2px 0px var(--neon-cyan, #00f5ff),
+     2px  2px 0px var(--neon-magenta, #ff006e),
+     3px  3px 0px rgba(0, 0, 0, 0.8);
 }
 
-.glitch-heading::before,
-.glitch-heading::after {
-  content: attr(data-text);
+/* Shared clone layer base */
+.glitch-text-clone {
   position: absolute;
-  inset: 0;
-  mix-blend-mode: screen;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
   pointer-events: none;
 }
 
-.glitch-heading::before {
-  color: var(--neon-magenta);
-  animation: glitch-slice-1 1.5s infinite steps(1, end);
+/* Magenta clone — offset left-up */
+.glitch-magenta {
+  color: var(--neon-magenta, #ff006e);
+  z-index: -1;
+  transform: translate(-2px, -1px);
+  opacity: 0.75;
+  animation: glitch-anim-1 2s linear infinite alternate-reverse;
 }
 
-.glitch-heading::after {
-  color: var(--neon-cyan);
-  animation: glitch-slice-2 1.2s infinite steps(1, end);
+/* Cyan clone — offset right-down */
+.glitch-cyan {
+  color: var(--neon-cyan, #00f5ff);
+  z-index: -2;
+  transform: translate(2px, 1px);
+  opacity: 0.75;
+  animation: glitch-anim-2 2s linear infinite alternate-reverse;
 }
 
-@keyframes glitch-slice-1 {
-  0%, 89%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  90% { clip-path: inset(10% 0 65% 0); transform: translate(-8px, 2px); }
-  91% { clip-path: inset(55% 0 15% 0); transform: translate(8px, -2px); }
-  92% { clip-path: inset(30% 0 40% 0); transform: translate(-5px, 0); }
-  93% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  96% { clip-path: inset(70% 0 5% 0); transform: translate(6px, 2px); }
-  97% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+@keyframes glitch-anim-1 {
+  0%   { clip-path: inset(40% 0 61%); }
+  20%  { clip-path: inset(92% 0 1%);  }
+  40%  { clip-path: inset(15% 0 80%); }
+  60%  { clip-path: inset(80% 0 5%);  }
+  80%  { clip-path: inset(5% 0 92%);  }
+  100% { clip-path: inset(61% 0 40%); }
 }
 
-@keyframes glitch-slice-2 {
-  0%, 84%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  85% { clip-path: inset(60% 0 10% 0); transform: translate(8px, 0); }
-  86% { clip-path: inset(15% 0 60% 0); transform: translate(-8px, 2px); }
-  87% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  94% { clip-path: inset(40% 0 35% 0); transform: translate(5px, -2px); }
-  95% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+@keyframes glitch-anim-2 {
+  0%   { clip-path: inset(25% 0 58%); }
+  20%  { clip-path: inset(64% 0 25%); }
+  40%  { clip-path: inset(5% 0 92%);  }
+  60%  { clip-path: inset(92% 0 5%);  }
+  80%  { clip-path: inset(55% 0 15%); }
+  100% { clip-path: inset(82% 0 10%); }
 }
 
 .glitch-heading--inverse {
   color: var(--signal);
   text-shadow:
-    2px 0 var(--circuit),
-    -2px 0 var(--circuit),
-    0 2px var(--circuit),
-    0 -2px var(--circuit);
+    -2px -2px 0px var(--signal),
+     2px  2px 0px var(--circuit),
+     3px  3px 0px rgba(0, 0, 0, 0.8);
 }
-.glitch-heading--inverse::before { color: var(--circuit); }
-.glitch-heading--inverse::after { color: var(--signal); }
+.glitch-heading--inverse .glitch-magenta { color: var(--circuit); }
+.glitch-heading--inverse .glitch-cyan { color: var(--signal); }
 
 /* subtle chromatic-aberration flicker on hover, for card titles */
 .cyber-title:hover {

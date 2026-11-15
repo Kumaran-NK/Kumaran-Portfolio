@@ -254,7 +254,7 @@ export default function Certifications() {
   const closeZoom = () => setLightbox(null);
 
   return (
-    <section id="certifications" className="max-w-7xl mx-auto px-6 py-28 scroll-mt-20">
+    <section id="certifications" className="max-w-7xl mx-auto px-6 pt-2 sm:pt-4 pb-28 scroll-mt-20">
       <div className="flex flex-wrap items-baseline gap-3 sm:gap-5 mb-4">
         <div className="ml-6" style={{ fontFamily: "Impact, sans-serif" }}>
           <GlitchHeading text="CERTIFICATIONS" />

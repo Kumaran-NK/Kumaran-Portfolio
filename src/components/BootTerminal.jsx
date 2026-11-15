@@ -42,7 +42,8 @@ export default function BootTerminal({
   label = "kumaran@dev-env:~",
   lines = DEFAULT_LINES,
   edge = "var(--circuit)",
-  className = "",
+  className = "max-w-xl",
+  bodyClassName = "px-4 py-3 min-h-[120px] text-xs space-y-1",
 }) {
   const [step, setStep] = useState(0);
 
@@ -52,7 +53,7 @@ export default function BootTerminal({
         x: [0, -4, 4, -4, 4, -2, 2, 0],
         transition: { duration: 0.4 },
       }}
-      className={`w-full max-w-xl brutal-border bg-[var(--bg-panel)] ${className}`}
+      className={`w-full brutal-border bg-[var(--bg-panel)] ${className}`}
       style={{ boxShadow: `6px 6px 0px 0px ${edge}` }}
     >
       <div className="flex items-center gap-2 px-3 py-2 border-b-2 border-black bg-[var(--bg-panel-2)]">
@@ -61,7 +62,7 @@ export default function BootTerminal({
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--circuit)]" />
         <span className="ml-2 text-[11px] text-[var(--ink-dim)]">{label}</span>
       </div>
-      <div className="px-4 py-3 min-h-[120px] text-xs space-y-1">
+      <div className={bodyClassName}>
         {lines.map((line, idx) => (
           <TypedLine
             key={line.text}

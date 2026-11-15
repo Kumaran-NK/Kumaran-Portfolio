@@ -231,7 +231,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="relative max-w-7xl mx-auto px-6 py-28 overflow-hidden scroll-mt-20">
+    <section id="experience" className="relative max-w-7xl mx-auto px-6 pt-2 sm:pt-4 pb-28 overflow-hidden scroll-mt-20">
       {/* Space layer — sits behind everything, kept faint so it reads as
           atmosphere behind the circuit-board grid rather than a second,
           competing theme. Nothing here should ever outshine the content. */}

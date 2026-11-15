@@ -10,14 +10,15 @@ const PILLS = [
 ];
 
 const TRAITS = [
-  "Research-Oriented",
-  "Builder Mindset",
-  "Performance-Focused",
+  "Systems Over Syntax",
+  "Architecture Over Hype",
+  "Shipping Over Talking",
+  "Built For Failure Modes",
 ];
 
 export default function About() {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-6 pt-24 pb-32 scroll-mt-20">
+    <section id="about" className="max-w-7xl mx-auto px-6 pt-14 pb-28 scroll-mt-20">
       {/* Heading with Cyber Owl perched on top of "ABOUT ME" */}
       <div className="mb-10">
         <div className="relative inline-block ml-6" style={{ fontFamily: "Impact, sans-serif" }}>
@@ -55,7 +56,7 @@ export default function About() {
             </p>
 
             <p className="text-[15px] sm:text-base leading-[1.8] text-[var(--ink)]/90 mb-8">
-              That shift pulled me from breadboards into Spring Boot microservices, Redis-backed rate limiters, and AI pipelines built with LangChain. I&apos;ve shipped a logistics document-AI system that handles thousands of concurrent uploads, a self-healing rate limiter tested with chaos engineering on Kubernetes, and a reinforcement-learning simulation deployed to Hugging Face.
+              That shift pulled me from breadboards into Spring Boot microservices, Redis-backed rate limiters, and AI pipelines. I&apos;ve shipped a self-healing rate limiter that chaos-tested its own recovery on Kubernetes and a reinforcement-learning simulation for grid-scale battery control deployed to Hugging Face.
             </p>
 
             <div className="flex flex-wrap gap-2.5">
@@ -92,16 +93,16 @@ export default function About() {
             </h3>
 
             <p className="font-code-sm text-code-sm text-black italic mb-4 leading-relaxed font-bold">
-              &quot;I&apos;ve made a vow to myself to simplify complex hardware-software interactions and turn theoretical AI models into efficient, real-world edge solutions. I do enjoy quantum mechanics.&quot;
+              &ldquo;The part of engineering I love most is the part users never see &mdash; choosing the right data structure, deciding where a system should fail gracefully, and making something complex feel effortless. That&apos;s the puzzle I wake up for.&rdquo;
             </p>
 
-            <div className="mt-6">
-              <h4 className="font-label-caps text-label-caps text-black uppercase mb-2 font-bold">
-                Traits
+            <div className="mt-5 pt-4 border-t border-black/20">
+              <h4 className="font-label-caps text-label-caps text-black uppercase mb-3 font-bold tracking-wider">
+                TRAITS
               </h4>
-              <ul className="font-code-sm text-[13px] text-black space-y-1 list-none font-bold">
+              <ul className="font-code-sm text-[13px] text-black space-y-1.5 list-none font-bold">
                 {TRAITS.map((trait) => (
-                  <li key={trait} className="flex items-center gap-1">
+                  <li key={trait} className="flex items-center gap-1.5">
                     <span className="text-spider-magenta font-extrabold">&gt;</span> {trait}
                   </li>
                 ))}
